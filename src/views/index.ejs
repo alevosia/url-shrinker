@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .table th {
+            text-align: center;
+            padding: 10px 15px;
+        }
+
+        .table tr td:nth-child(2), .table tr td:nth-child(3) {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto d-flex flex-column justify-content-center p-3 p-md-5">
+
+        <h1 class="mx-auto">URL Shrinker</h1>
+        <form action="/short" method="POST" class="mx-auto mt-3">
+            <label for="fullURL" class="sr-only">URL</label>
+            <input type="url" name="fullURL" id="fullURL" placeholder="Enter URL">
+            <button type="submit">Shrink</button>
+        </form>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table class="mt-5 table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Full URL</th>
+                            <th>Short URL</th>
+                            <th>Clicks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (results && results.length > 0) {
+                            for (let res of results) { %>
+                                <tr>
+                                    <td><a href="<%= res.full %>" target="_blank"><%= res.full %></a></td>
+                                    <td><a href="<%= res.short %>" target="_blank"><%= res.short %></a></td>
+                                    <td><%= res.clicks %></td>
+                                </tr>
+                            <% }
+                        } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

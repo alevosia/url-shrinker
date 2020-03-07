@@ -12,4 +12,4 @@
 > npm run build
 
 ### 4. Start
-> npm run start
+> npm start

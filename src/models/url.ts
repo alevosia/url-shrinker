@@ -29,4 +29,4 @@ const URLSchema = new Schema<IURL>({
 	}
 });
 
-export default model<IURL>("ShortURL", URLSchema);
+export default model<IURL>("URL", URLSchema);

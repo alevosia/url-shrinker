@@ -1,42 +1,30 @@
 import { Router } from "express";
-import ShortURL from "../models/url";
+import URL from "../models/url";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-	ShortURL.find()
-		.select({ _id: 0 })
-		.then(results => {
-			res.render("index", { results: results });
-		})
-		.catch(err => {
-			res.sendStatus(500);
-		});
+// GET /
+router.get("/", async (req, res) => {
+	const results = await URL.find();
+	res.render("index", { results: results });
 });
 
-router.get("/:shortenedURL", (req, res) => {
+// GET /:shortenedURL
+router.get("/:shortenedURL", async (req, res) => {
 	const shortenedURL = req.params.shortenedURL;
-
-	ShortURL.findOne({ short: shortenedURL })
-		.then(shortURL => {
-			if (shortURL) {
-				shortURL.clicks++;
-				shortURL.save();
-				res.redirect(shortURL.full);
-			} else {
-				res.sendStatus(404);
-			}
-		})
-		.catch(err => {
-			console.error(err);
-			res.sendStatus(404);
-		});
+	const url = await URL.findOne({ short: shortenedURL });
+	if (!url) {
+		return res.sendStatus(404);
+	}
+	res.redirect(url.full);
+	url.clicks++;
+	url.save();
 });
 
+// GET /short
 router.post("/short", async (req, res) => {
 	const fullURL = req.body.fullURL;
-	await ShortURL.create({ full: fullURL });
-
+	await URL.create({ full: fullURL });
 	res.redirect("/");
 });
 

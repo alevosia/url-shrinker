@@ -5,7 +5,11 @@ import { join } from "path";
 import mongoose from "mongoose";
 import passport from "./config/passport";
 import session from "./config/session";
+import flash from 'connect-flash';
+
+// Routers
 import rootRouter from "./routes/root";
+import authRouter from "./routes/auth";
 
 declare const process: {
 	env: {
@@ -27,10 +31,12 @@ app.use(helmet());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session);
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(rootRouter);
+app.use("/", rootRouter);
+app.use("/auth", authRouter);
 
 mongoose
 	.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })

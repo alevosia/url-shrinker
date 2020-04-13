@@ -2,6 +2,7 @@
   "name": "url-shortener",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "compile": "tsc -p .",
@@ -12,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alevfalse/url-shortener.git"
+    "url": "git+https://github.com/alevosia/url-shortener.git"
   },
   "author": "alex",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alevfalse/url-shortener/issues"
+    "url": "https://github.com/alevosia/url-shortener/issues"
   },
-  "homepage": "https://github.com/alevfalse/url-shortener#readme",
+  "homepage": "https://github.com/alevosia/url-shortener#readme",
   "dependencies": {
     "argon2": "^0.26.1",
     "connect-flash": "^0.1.1",
